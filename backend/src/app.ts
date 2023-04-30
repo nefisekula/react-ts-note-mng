@@ -4,6 +4,7 @@ import express, { NextFunction, Request, Response } from "express";
 import notesRoutes from "./routes/notes";
 import morgan from "morgan";
 import createHttpError, { isHttpError } from "http-errors";
+import cors from "cors";
 
 const app = express();
 
@@ -14,6 +15,8 @@ app.use(express.json());
 
 //To get json data
 app.use("/api/notes", notesRoutes);
+
+app.use(cors());
 
 // Outside of 500 error, error is handled here.
 app.use((req: Request, res: Response, next: NextFunction) => {
